@@ -1,0 +1,11 @@
+_base_: '../Base/Base_Sup_Mono_Depth.yaml'
+
+model:
+  name: "BTS"
+  eval_mode: 'depth' 
+
+  # Network options  
+  bts_size: 512
+  encoder: 'resnext101_bts'
+  max_depth: 80.0
+  

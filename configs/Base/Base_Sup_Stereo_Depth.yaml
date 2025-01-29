@@ -1,0 +1,90 @@
+# training option
+total_epochs: &e 40
+batch_lim_per_epoch: 5000
+imgs_per_gpu: &b 4 # per GPU batch size
+workers_per_gpu: 4
+
+dataset:
+  list: ["MS2"] # ["MS2", "ViViD", ... ]
+
+  multi:
+    mode: 'sequential' # ["sequential", "parallel"]
+
+  MS2:
+    name: "MS2"
+    dataset_dir: "./datasets/KAIST_MS2"
+    available_modality: ['rgb', 'nir', 'thr']
+
+    train:
+      modality: 'thr'
+      seq_length: 1 # number of images e.g., 3 => {T-N, T, T+N}
+      seq_interval: 1 # interval between sequectial images (i.e., N)
+      sample_step: 1  # sampling step S, T=S*t (t=0,1,2,...)
+    val:
+      modality: 'thr'
+      seq_length: 1
+      seq_interval: 1
+      sample_step: 3
+    test:
+      modality: 'thr'
+      seq_length: 1 
+      seq_interval: 1 
+      sample_step: 10
+
+    rgb:
+      train_size: [256, 640] # Original image resol: [384, 1224]
+      test_size : [256, 640] 
+    nir:
+      train_size: [256, 640] # Original image resol: [352, 1280]
+      test_size : [256, 640] 
+    thr:
+      train_size: [256, 640] # Original image resol: [256, 640]
+      test_size : [256, 640]
+
+    data_format: 'StereoMatching' 
+
+  Augmentation:
+    rgb:
+      FlagHFlip: True
+      FlagCrop: True
+      FlagResize: True
+      FlagJitter: True
+
+      FlagImgWiseClip: False 
+      FlagGroupWiseClip: False
+      FlagGroupWiseRearrange: False
+      FlagLCE: False
+      bin_num: 30
+
+    nir:
+      FlagHFlip: True
+      FlagCrop: True
+      FlagResize: True
+      FlagJitter: True
+
+      FlagImgWiseClip: False 
+      FlagGroupWiseClip: False
+      FlagGroupWiseRearrange: False
+      FlagLCE: False
+      bin_num: 30
+
+    thr:
+      FlagHFlip: True
+      FlagCrop: True
+      FlagResize: True
+      FlagJitter: True
+
+      FlagImgWiseClip: True # clipping input image within 1-99% value
+      FlagGroupWiseClip: False 
+      FlagGroupWiseRearrange: False
+      FlagLCE: False
+      bin_num: 30
+
+optim:
+  learning_rate: 1.0e-4 
+  optimizer: 'AdamW'
+  scheduler: 'CosineAnnealWarm'
+  CosineAnnealWarm:
+    T_0: 10
+    T_mult: 1
+    eta_min: 1.e-6

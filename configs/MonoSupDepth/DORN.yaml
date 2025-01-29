@@ -1,0 +1,12 @@
+_base_: '../Base/Base_Sup_Mono_Depth.yaml'
+
+model:
+  name: "DORN"
+  eval_mode: 'depth' 
+
+  # Network options  
+  resnet_layers: 101
+  ord_num: 90
+  alpha: 0.001
+  beta: 80.0
+  discretization: 'SID'

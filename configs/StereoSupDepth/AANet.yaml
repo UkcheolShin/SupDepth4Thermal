@@ -1,0 +1,30 @@
+_base_: '../Base/Base_Sup_Stereo_Depth.yaml'
+
+model:
+  name: "AANet"
+  eval_mode: 'depth' 
+
+  # Network options  
+  max_disp: 192 # 'Max disparity'
+  num_downsample: 2 # 'Number of downsample layer for feature extraction'
+  feature_type: 'aanet' #'Type of feature extractor'
+  no_feature_mdconv: False #'Whether to use mdconv for feature extraction'
+  feature_pyramid: False #'Use pyramid feature'
+  feature_pyramid_network: True #'Use FPN' 
+  feature_similarity: 'correlation' # 'Similarity measure for matching cost'
+  aggregation_type: 'adaptive' #'Type of cost aggregation'
+  num_scales: 3 # 'Number of stages when using parallel aggregation'
+  num_fusions: 6 #'Number of multi-scale fusions when using parallel aggragetion'
+  num_stage_blocks: 1 #'Number of deform blocks for ISA'
+  num_deform_blocks: 3 #Number of DeformBlocks for aggregation'
+  no_intermediate_supervision: False #'Whether to add intermediate supervision'
+  refinement_type: 'stereodrnet' #'Type of refinement module'
+  mdconv_dilation: 2 #'Dilation rate for deformable conv'
+  deformable_groups: 2 #'Number of deformable groups'
+  freeze_bn: False #'Switch BN to eval mode to fix running statistics'
+
+  pre_trained: False
+  ckpt_path: './pt_weights/aanet/aanet_sceneflow-5aa5a24e.pth'
+
+  # loss option
+  highest_loss_only: False # 'Only use loss on highest scale for finetuning'

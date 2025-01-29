@@ -1,0 +1,1 @@
+from .cfnet import CFNetModel

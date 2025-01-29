@@ -1,0 +1,12 @@
+_base_: '../Base/Base_Sup_Mono_Depth.yaml'
+
+model:
+  name: "NewCRF"
+  eval_mode: 'depth' 
+
+  # Network options  
+  encoder: 'large07' #['base07, large07']
+  pre_trained: False
+  ckpt_path: './pt_weights/swin_large_patch4_window7_224_22k.pth' 
+  min_depth: 1.0e-3
+  max_depth: 80.0

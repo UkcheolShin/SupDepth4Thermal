@@ -1,0 +1,8 @@
+_base_: '../Base/Base_Sup_Stereo_Depth.yaml'
+
+model:
+  name: "CFNet"
+  eval_mode: 'depth' 
+
+  # Network options  
+  max_disp: 192 # 'Max disparity'

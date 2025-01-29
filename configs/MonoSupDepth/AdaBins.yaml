@@ -1,0 +1,14 @@
+_base_: '../Base/Base_Sup_Mono_Depth.yaml'
+
+model:
+  name: "AdaBins"
+  eval_mode: 'depth' 
+  
+  # Network options  
+  n_bins: 256
+  min_depth: 1.0e-3
+  max_depth: 80.
+  norm: 'linear'
+
+  # loss option
+  bin_weight: 0.1 

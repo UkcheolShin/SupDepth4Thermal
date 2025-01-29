@@ -1,0 +1,13 @@
+_base_: '../Base/Base_Sup_Stereo_Depth.yaml'
+
+model:
+  name: "ACVNet"
+  eval_mode: 'depth' 
+
+  # Network options  
+  max_disp: 192 # 'Max disparity'
+  attention_weights_only: False #'only train attention weights'
+  freeze_attention_weights: False #'freeze attention weights parameters'
+
+  pre_trained: False
+  ckpt_path: 'pt_weights/acv_net/sceneflow.ckpt'

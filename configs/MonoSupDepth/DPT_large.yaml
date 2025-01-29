@@ -1,0 +1,12 @@
+_base_: '../Base/Base_Sup_Mono_Depth.yaml'
+
+model:
+  name: "Midas"
+  eval_mode: 'depth'
+
+  # Network options  
+  mode: 'dpt_large' #['midas', 'midas_small', 'DPT_hybrid', 'dpt_large',]
+  pre_trained: False
+  ckpt_path: './pt_weights/dpt_large-midas-2f21e586.pt' 
+  min_depth: 1.0e-3
+  max_depth: 80.

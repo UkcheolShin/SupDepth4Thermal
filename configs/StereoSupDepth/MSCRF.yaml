@@ -1,0 +1,19 @@
+_base_: '../Base/Base_Sup_Stereo_Depth.yaml'
+
+model:
+  name: "MonoStereoCRF" 
+  eval_mode: 'depth' 
+
+  # Network options  
+  max_disp: 192 # 'Max disparity'
+  use_concat_volume: False
+  use_3d_decoder: False
+  use_swin_backbone: True
+  encoder: 'large'
+  pre_trained: False
+  ckpt_path: './pt_weights/swin_large_patch4_window7_224_22k.pth' 
+  disp_head: 'classify' #'regression', 'classify'
+
+  # loss option
+  mono_weight: 0.5
+  stereo_weight: 1.0 
